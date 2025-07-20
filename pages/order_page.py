@@ -10,6 +10,7 @@ class OrderPage(BasePage):
 
     @allure.step('Заполнение первой части формы и нажатие кнопки "Далее"')
     def data_entry_first_form(self, test_data):
+        self.driver.fullscreen_window()
         self.wait_visibility_of_element(OrderPageLocators.name)
         self.click_on_element(OrderPageLocators.name)
         self.send_keys_to_input(OrderPageLocators.name, test_data[0])
@@ -22,6 +23,8 @@ class OrderPage(BasePage):
         self.click_on_element(OrderPageLocators.select_item_in_dropdown_metro)
         self.click_on_element(OrderPageLocators.phone)
         self.send_keys_to_input(OrderPageLocators.phone, test_data[4])
+        self.wait_visibility_of_element(OrderPageLocators.button_next)
+        self.scroll_to_element(OrderPageLocators.button_next)
         self.click_on_element(OrderPageLocators.button_next)
 
     @allure.step('Заполнение второй части формы и окно подтверждения')
@@ -39,19 +42,13 @@ class OrderPage(BasePage):
         self.click_on_element(OrderPageLocators.button_yes_confirm_order)
 
 
-    def send_keys_to_input(self, locator, test_data, clear_field=True):
-        element = self.driver.find_element(*locator)
-        if clear_field:
-            element.clear()
-        element.send_keys(test_data)
-
     @allure.step('Кликнуть по предлагаемому варианту в выпадающем списке станций метро')
     def select_station(self):
         self.click_on_element(OrderPageLocators.select_item_in_dropdown_metro)
 
     @allure.step('Ввести дату заказа в инпут "Когда привезти самокат"')
     def send_keys_date_by_keyboard_input(self):
-        self.send_keys_to_input(OrderPageLocators.date).send_keys(TstData.test_data_user1[5])
+        self.send_keys_to_input(OrderPageLocators.date).send_keys(TestData.test_data_user1[5])
 
     @allure.step('Кликнуть по выбранной дате в выпадающем календаре поля ввода даты начала аренды')
     def click_date_in_calendar(self):

@@ -43,4 +43,17 @@ class BasePage:
     def check_displaying_of_element(self, locator):
         return self.driver.find_element(*locator).is_displayed()
 
+    @allure.step('Ожидание полной загрузки страницы')
+    def wait_for_page_to_load(self, timeout=10):
+        WebDriverWait(self.driver, timeout).until(
+            lambda driver: driver.execute_script('return document.readyState') == 'complete'
+        )
+
+    def send_keys_to_input(self, locator, test_data, clear_field=True):
+        element = self.driver.find_element(*locator)
+        if clear_field:
+            element.clear()
+        element.send_keys(test_data)
+
+
 

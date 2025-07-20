@@ -20,4 +20,5 @@ class OrderPageLocators:
     comment = (By.XPATH, ".//input[@placeholder='Комментарий для курьера']")
     button_make_order = (By.XPATH, ".//div[contains(@class, 'Order_Buttons')]/button[text()='Заказать']")
     button_yes_confirm_order = (By.XPATH, ".//button[text()='Да']")
-    button_check_status_of_order = (By.XPATH, ".//[text()='Посмотреть статус']")
+    button_check_status_of_order = (By.XPATH, ".//*[text()='Посмотреть статус']")
+

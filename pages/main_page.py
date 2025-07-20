@@ -58,8 +58,3 @@ class MainPage(BasePage):
     def get_displayed_text_from_faq_answers(self, data):
         return self.get_text_on_element(MainPageLocators.faq_answers_items[data])
 
-    @allure.step('Ожидание полной загрузки страницы')
-    def wait_for_page_to_load(self, timeout=10):
-        WebDriverWait(self.driver, timeout).until(
-            lambda driver: driver.execute_script('return document.readyState') == 'complete'
-        )
